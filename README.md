@@ -1,0 +1,2 @@
+# butterbot
+Simple discord bot

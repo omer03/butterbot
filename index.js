@@ -79,14 +79,21 @@ client.on('message', (message) => {
       lastUser = message.author;
       break;
     case 'type': {
-      let interval;
       let randomWord = Math.random().toString(36).replace(/[^a-z]+/g, '');
+      let interval;
       let timer = 3;
-      message.channel.send('Generating a new word..').then((msg) => {
-        interval = setInterval(function() {
-          msg.edit(`Starting in **${timer--}**..`);
-        }, 1000);
-      });
+      message.channel.send('Type 10 words shown in chat as fast as possible. ')
+        .then((msg) => {
+          msg.delete(2500);
+        });
+      setTimeout(function() {
+        message.channel.send('Generating a new word..').then((msg) => {
+          interval = setInterval(function() {
+            msg.edit(`Starting in **${timer--}**..`);
+            msg.delete(3500);
+          }, 1000);
+        });
+      }, 2000);
       setTimeout(function() {
         clearInterval(interval);
         message.channel.send(randomWord)
@@ -106,7 +113,7 @@ client.on('message', (message) => {
               message.channel.send("You're too slow.");
             });
         });
-      }, 4000);
+      }, 6000);
       break;
     }
     case 'help':
